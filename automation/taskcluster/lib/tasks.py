@@ -11,6 +11,8 @@ import taskcluster
 
 from lib.util import upper_case_first_letter
 
+from automation.taskcluster.lib.util import lower_case_first_letter, convert_camel_case_into_kebab_case
+
 DEFAULT_EXPIRES_IN = '1 year'
 DEFAULT_APK_ARTIFACT_LOCATION = 'public/target.apk'
 _OFFICIAL_REPO_URL = 'https://github.com/mozilla-mobile/fenix'
