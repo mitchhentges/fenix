@@ -1,4 +1,4 @@
-# Firefox Fenix
+# Firefox Fenix 2 electric boogalooooooo
 
 Firefox Fenix is a new browser for Android
 
