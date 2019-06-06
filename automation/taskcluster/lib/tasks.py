@@ -456,11 +456,10 @@ class TaskBuilder(object):
         )
 
     def craft_push_task(
-        self, signing_task_id, apks, track, is_staging=False
+        self, signing_task_id, apks, track, is_staging=False, override_google_play_track=None
     ):
         payload = {
             "commit": True,
-            "google_play_track": track,
             "certificate_alias": 'fenix' if is_staging else 'fenix-{}'.format(track),
             "upstreamArtifacts": [
                 {
@@ -470,6 +469,9 @@ class TaskBuilder(object):
                 }
             ]
         }
+
+        if override_google_play_track:
+            payload['google_play_track'] = override_google_play_track
 
         return self._craft_default_task_definition(
             worker_type='mobile-pushapk-dep-v1' if is_staging else 'mobile-pushapk-v1',
