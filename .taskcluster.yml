@@ -45,7 +45,7 @@ tasks:
 
     trust_level:
       # Pull requests on main repository can't be trusted because anybody can open a PR on it, without a review
-      $if: 'tasks_for in ["github-push", "github-release", "cron"] && event.repository.html_url == "https://github.com/mozilla-mobile/fenix"'
+      $if: 'tasks_for in ["github-push", "github-release", "cron"] && event.repository.html_url == "https://github.com/mitchhentges/fenix"'
       then: 3
       else: 1
   in:
@@ -204,10 +204,6 @@ tasks:
                         - $if: 'trust_level == 3'
                           then: assume:hook-id:project-mobile/fenix-nightly
                           else: assume:hook-id:project-mobile/fenix-nightly-staging
-                      routes:
-                        $if: 'trust_level == 3'
-                        then:
-                          - notify.email.fenix-eng-notifications@mozilla.com.on-failed
                       payload:
                         command:
                           - >-
