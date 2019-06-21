@@ -60,11 +60,12 @@ class TaskBuilder(object):
             'python automation/taskcluster/helper/get-secret.py -s {} -k {} -f {}'.format(
                 secret_index, key, target_file
             )
-            for key, target_file in (
+            for key, target_file in filter(None.__ne__, (
                 ('sentry_dsn', '.sentry_token'),
                 ('leanplum', '.leanplum_token'),
                 ('adjust', '.adjust_token'),
-            )
+                ('firebase', 'app/src/production/res/values/firebase.xml') if channel == 'production' else None,
+            ))
         )
 
         capitalized_channel = upper_case_first_letter(channel)
