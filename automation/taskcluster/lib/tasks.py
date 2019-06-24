@@ -60,12 +60,12 @@ class TaskBuilder(object):
             'python automation/taskcluster/helper/get-secret.py -s {} -k {} -f {}'.format(
                 secret_index, key, target_file
             )
-            for key, target_file in filter(None.__ne__, (
+            for key, target_file in (secret for secret in (
                 ('sentry_dsn', '.sentry_token'),
                 ('leanplum', '.leanplum_token'),
                 ('adjust', '.adjust_token'),
                 ('firebase', 'app/src/production/res/values/firebase.xml') if channel == 'production' else None,
-            ))
+            ) if secret is not None)
         )
 
         capitalized_channel = upper_case_first_letter(channel)
@@ -375,9 +375,7 @@ class TaskBuilder(object):
             "priority": self.tasks_priority,
             "dependencies": [self.task_id] + dependencies,
             "requires": "all-completed",
-            "routes": routes + [
-                "tc-treeherder.v2.fenix.{}".format(self.commit)
-            ],
+            "routes": routes + [],
             "scopes": scopes,
             "payload": payload,
             "extra": {

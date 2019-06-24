@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
@@ -57,6 +58,8 @@ open class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.d("mhentges", "yeet: " + getString(resources.getIdentifier("project_id", "string", packageName)))
 
         components.publicSuffixList.prefetch()
         browsingModeManager = createBrowsingModeManager()
